@@ -28,9 +28,11 @@ public class MainActivity extends FlutterActivity {
         new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler(
                 (call, res) -> {
 
+                    callFlutter();
                     Intent intent = new Intent(MainActivity.this, FlutterReceiver.class);
                     pendingIntent = PendingIntent.getBroadcast(this, 1989, intent, 0);
                     alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    //alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000, pendingIntent);
                     alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 30000, pendingIntent);
                 }
         );
